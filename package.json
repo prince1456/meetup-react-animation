@@ -5,7 +5,15 @@
   "dependencies": {
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
+<<<<<<< HEAD
+    "react-pose": "^4.0.6",
+    "react-reveal": "^1.2.2",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.4",
+    "semantic-ui-react": "^0.85.0"
+=======
     "react-scripts": "2.1.4"
+>>>>>>> 474148a62e7da4f787f784ba5705fcf339832f5f
   },
   "scripts": {
     "start": "react-scripts start",
