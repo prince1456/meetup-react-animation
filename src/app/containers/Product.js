@@ -1,11 +1,37 @@
 import React, { Component } from "react";
-import { Card, Image, Icon, Container } from "semantic-ui-react";
+import { Card, Image, Icon } from "semantic-ui-react";
+import posed from "react-pose";
 import mImage from "../../assets/elliot.jpg";
+
+const Container = posed.div({
+  enter: { staggerChildren: 100 }
+});
+const AmimatedDiv = posed.div({
+  visible: { x: '0%',
+  staggerChildren: 50, 
+  delayChildren: 300 
+},
+  hidden: { x: '-100%' }
+});
+
+
 class Product extends Component {
+  state = {
+    isVisible: false,
+  };
+  componentDidMount(){
+      setTimeout(() => {
+        this.setState({isVisible: !this.state.isVisible})
+      }, 200)
+  }
   render() {
+    const { isVisible } = this.state;
     return (
       <Container>
-        <div style={styles.listContainer}>
+        <AmimatedDiv
+          style={styles.listContainer}
+          posed={isVisible ? "visible" : "hidden"}
+        >
           {Array(4)
             .fill(1)
             .map((item, index) => {
@@ -30,7 +56,7 @@ class Product extends Component {
                 </Card>
               );
             })}
-        </div>
+        </AmimatedDiv>
       </Container>
     );
   }
@@ -42,6 +68,8 @@ const styles = {
   listContainer: {
     display: "flex",
     flexDirection: "row",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    backgroundColor: "red",
+    width: '80%',
   }
 };
