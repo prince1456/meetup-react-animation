@@ -6,7 +6,7 @@ import Product from "./containers/Product";
 import posed, { PoseGroup } from "react-pose";
 
 const AnimatedRoute = posed.div({
-  enter: { opacity: 1, delay: 300, beforeChildren: true },
+  enter: { opacity: 1, delay: 100, beforeChildren: true },
   exit: { opacity: 0 }
 });
 class Root extends Component {
@@ -40,7 +40,7 @@ class Root extends Component {
                   />
                 </Menu>
                 <PoseGroup>
-                  <AnimatedRoute key={location.key}>
+                  <AnimatedRoute key={Math.random()}>
                     <Switch>
                       <Route path="/" exact component={Home} />
                       <Route path="/product" component={Product} />
