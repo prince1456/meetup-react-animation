@@ -9,21 +9,64 @@ const Container = posed.div({
   enter: { staggerChildren: 100 }
 });
 const AnimtatedUl = posed.div({
-  open: {
-    x: "0%",
-    delayChildren: 200,
-    staggerChildren: 50
+  visible: {
+    // cordinate of each element after appear in the page
+    opacity: 1,
+    x: 0,
+    // y: "0%",
+    transition: {
+      x: {
+      type: 'tween', 
+      // make animation slower
+      duration: 400,
+      // number of time to flip animation
+      // flip: 1,
+      // number of time to reverse animation
+      // yoyo: 1,
+    },
+      opacity: { ease: "easeOut", duration: 300 },
+      default: { ease: "linear", duration: 500 }
+    },
+    // scale: 1,
+    // add direction to animate from first last element to first elmenet
+    // staggerDirection: "-1",
+    // delay to show first child
+    delayChildren: 1000,
+    // adding delat time for stage each child
+    staggerChildren: 300
   },
-  exit: { x: "-100%", delay: 300 }
+  hidden: {
+    opacity: 0,
+    // cordinate of each element after appear in the page
+    // y: "-100%",
+    x: "-200%",
+    // scale: 0,
+    // delat to start animation
+    delay: 1000
+  }
 });
+
 const AnimatedCard = posed.div({
-  open: { y: 0, opacity: 1 },
-  closed: { y: 20, opacity: 0 }
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: {
+        type: 'spring',
+        // speed of drop
+        stiffness: 100,
+        // force of drop
+        damping: 4,
+        // the amount of moving element
+        mass: .5
+      },
+      opacity: { ease: "easeOut", duration: 300 },
+      default: { ease: "linear", duration: 500 }
+    }
+  },
+  hidden: { y: -100, opacity: 0 }
 });
-const P = posed.p({
-  enter: { x: 0, opacity: 1 },
-  exit: { x: 50, opacity: 0 }
-});
+
 const extra = (
   <div>
     <Icon name="user" />
@@ -41,11 +84,14 @@ class Product extends Component {
     const { isOpen } = this.state;
     return (
       <Container>
-        <AnimtatedUl pose={isOpen ? "open" : "closed"}>
+        <AnimtatedUl
+          style={styles.cardContainer}
+          pose={isOpen ? "visible" : "hidden"}
+        >
           {Array(4)
             .fill(2)
             .map((x, i) => (
-              <AnimatedCard key={i}>
+              <AnimatedCard style={styles.card} key={i}>
                 <Card
                   image={myImage}
                   header="Elliot Baker"
@@ -56,14 +102,20 @@ class Product extends Component {
               </AnimatedCard>
             ))}
         </AnimtatedUl>
-
-        <P>
-          <Link to="/">Home</Link>
-        </P>
-        <P style={{ color: "white" }}>Learn React</P>
       </Container>
     );
   }
 }
 
 export default Product;
+const styles = {
+  cardContainer: {
+    flexWrap: "wrap",
+    display: "flex",
+    flexDirection: "row",
+    backgroundColor: "red"
+  },
+  card: {
+    margin: 10
+  }
+};
