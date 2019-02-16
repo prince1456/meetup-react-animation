@@ -4,6 +4,7 @@ import Home from "./containers/Home";
 import { Menu } from "semantic-ui-react";
 import Product from "./containers/Product";
 import posed, { PoseGroup } from "react-pose";
+import Element from './containers/element'
 
 const AnimatedRoute = posed.div({
   enter: { opacity: 1, delay: 100, beforeChildren: true },
@@ -38,12 +39,20 @@ class Root extends Component {
                       this.handleItemClick("Product", history, "/product")
                     }
                   />
+                  <Menu.Item
+                    name="Elment"
+                    active={activeMenu === "Element"}
+                    onClick={() =>
+                      this.handleItemClick("Element", history, "/element")
+                    }
+                  />
                 </Menu>
                 <PoseGroup>
                   <AnimatedRoute key={Math.random()}>
                     <Switch>
                       <Route path="/" exact component={Home} />
                       <Route path="/product" component={Product} />
+                      <Route path="/element" component={Element} />
                     </Switch>
                   </AnimatedRoute>
                 </PoseGroup>

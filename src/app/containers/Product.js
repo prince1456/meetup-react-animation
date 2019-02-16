@@ -47,23 +47,24 @@ const AnimtatedUl = posed.div({
 
 const AnimatedCard = posed.div({
   visible: {
-    y: 0,
+    x: 0,
+    scale: 1,
     opacity: 1,
     transition: {
-      y: {
+      x: {
         type: 'spring',
         // speed of drop
         stiffness: 100,
         // force of drop
-        damping: 4,
+        damping: 5,
         // the amount of moving element
-        mass: .5
+        mass: 0.4
       },
       opacity: { ease: "easeOut", duration: 300 },
       default: { ease: "linear", duration: 500 }
     }
   },
-  hidden: { y: -100, opacity: 0 }
+  hidden: { x: -100, scale: 0, opacity: 0 }
 });
 
 const extra = (
